@@ -34,21 +34,19 @@ class _ProfilePageState extends State<ProfilePage> {
                           fit: BoxFit.cover),
                     ),
                     child: Container(
-                      width: 90,
-                      height: 90,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: (mockUser.picturePath == null)
+                              image: ((context.watch<UserCubit>().state as UserLoaded).user.picturePath == "")
                                   ? AssetImage("assets/photo.png")
-                                  : NetworkImage(mockUser.picturePath),
+                                  : NetworkImage((context.watch<UserCubit>().state as UserLoaded).user.picturePath),
                               fit: BoxFit.cover)),
                     ),
                   ),
-                  Text((mockUser.name == null) ? "No User" : mockUser.name,
-                      style: blackFontStyle2.copyWith(fontSize: 18)),
+                  Text((context.watch<UserCubit>().state as UserLoaded).user.name,
+                      style: blackFontStyle2.copyWith(fontSize: 18, fontWeight: FontWeight.w500)),
                   SizedBox(height: 6),
-                  Text((mockUser.email == null) ? "User email" : mockUser.email,
+                  Text((context.watch<UserCubit>().state as UserLoaded).user.email,
                       style:
                           greyFontStyle.copyWith(fontWeight: FontWeight.w300)),
                 ],
@@ -137,6 +135,42 @@ class _ProfilePageState extends State<ProfilePage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text("Payments", style: blackFontStyle3),
+                                      SizedBox(
+                                        height: 24,
+                                        width: 24,
+                                        child: Image.asset(
+                                            "assets/right_arrow.png"),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await context.read<UserCubit>().signOut();
+                                    Get.offAll(SignInPage());
+
+                                    // if (result == true) {
+                                      
+                                    // } else {
+                                    //   Get.snackbar(
+                                    //     "",
+                                    //     "",
+                                    //     backgroundColor: "D9435E".toColor(),
+                                    //     icon: Icon(MdiIcons.closeCircleOutline,
+                                    //         color: Colors.white),
+                                    //     titleText: Text("Sign Out Faild",
+                                    //         style: GoogleFonts.poppins(
+                                    //             color: Colors.white,
+                                    //             fontWeight: FontWeight.w600)),
+                                    //     messageText: Text("Tunggu beberapa saat lagi " + result.toString(), style: GoogleFonts.poppins(color: Colors.white)),);
+                                    // }
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text("Sign Out", style: blackFontStyle3),
                                       SizedBox(
                                         height: 24,
                                         width: 24,

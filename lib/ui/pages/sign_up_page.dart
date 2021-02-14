@@ -6,6 +6,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  User user;
+  File pictureFile;
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
@@ -21,19 +24,34 @@ class _SignUpPageState extends State<SignUpPage> {
       },
       child: Column(
         children: [
-          Container(
-            height: 110,
-            width: 110,
-            margin: EdgeInsets.only(top: 26),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage("assets/photo_border.png"))
-            ),
+          GestureDetector(
+            onTap: () async {
+              PickedFile pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+              if(pickedFile != null) {
+                pictureFile = File(pickedFile.path);
+                setState(() {});
+              }
+            },
             child: Container(
+              height: 110,
+              width: 110,
+              margin: EdgeInsets.only(top: 26),
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage("assets/photo.png"), fit: BoxFit.cover)
+                image: DecorationImage(image: AssetImage("assets/photo_border.png"))
               ),
+              child: (pictureFile != null)
+                  ?  Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(image: FileImage(pictureFile), fit: BoxFit.cover)
+                ),
+              )   :   Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(image: AssetImage("assets/photo.png"), fit: BoxFit.cover)
+                ),
+              ),  
             ),
           ),
           Container(
@@ -108,7 +126,14 @@ class _SignUpPageState extends State<SignUpPage> {
             child: RaisedButton(
               elevation: 0,
               onPressed: () {
-                Get.to(AddressPage());
+                Get.to(AddressPage(
+                  User(
+                    name: nameController.text,
+                    email: emailController.text
+                  ),
+                  passwordController.text,
+                  pictureFile
+                ));
               },
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               color: mainColor,

@@ -1,5 +1,7 @@
 part of 'models.dart';
 
+enum FoodType {new_food, popular, recomended }
+
 class Food extends Equatable {
   final int id;
   final String picturePath;
@@ -8,6 +10,7 @@ class Food extends Equatable {
   final String ingredients;
   final int price;
   final double rate;
+  final List<FoodType> types;
 
   Food(
       {this.id,
@@ -16,7 +19,31 @@ class Food extends Equatable {
       this.description,
       this.ingredients,
       this.price,
-      this.rate});
+      this.rate,
+      this.types = const []});
+
+  factory Food.fromJson(Map<String, dynamic> data) => Food(
+    id: data['id'],
+    picturePath: data['picturePath'],
+    name: data['name'],
+    description: data['description'],
+    ingredients: data['ingredients'],
+    price: data['price'],
+    rate: (data['rate'] as num).toDouble(),
+    types: data['types'].toString().split(',').map((e) {
+      switch (e) {
+        case 'recommended':
+          return FoodType.recomended;
+          break;
+        case 'popular':
+          return FoodType.popular;
+          break;
+        default:
+          return FoodType.new_food;
+      }
+    }).toList()
+
+  );
 
   @override
   List<Object> get props =>
@@ -33,7 +60,8 @@ List<Food> mockFoods = [
           "Nasi goreng bang kari adalah salah nasi yang ramai peminatnya didaerah Darussalam  ",
       ingredients: "Nasi, Kecap, Cabe, Bawang, Seledri, Timun, Tomat",
       price: 10000,
-      rate: 2.5),
+      rate: 2.5,
+      types: [FoodType.popular, FoodType.recomended]),
   Food(
       id: 2,
       picturePath:
@@ -42,5 +70,16 @@ List<Food> mockFoods = [
       description: "Nasi uduk yang ramai disukai oleh banyak orang didaerah darussalam  ",
       ingredients: "Nasi, Bawang, Pandan, Timun, Ayam",
       price: 5000,
-      rate: 3.5),
+      rate: 3.5,
+      types: [FoodType.popular,]),
+  Food(
+      id: 3,
+      picturePath:
+          "https://cdn.yummy.co.id/content-images/images/20200326/XmyZpnYBPkWXTIEnp1G82BPIxYNdSUJo-31353835313938383937d41d8cd98f00b204e9800998ecf8427e_800x800.jpg",
+      name: "Nasi Padang",
+      description: "Nasi  ",
+      ingredients: "Nasi, Bawang, Pandan, Timun, Ayam",
+      price: 15000,
+      rate: 4.5,
+      types: [FoodType.new_food]),
 ];

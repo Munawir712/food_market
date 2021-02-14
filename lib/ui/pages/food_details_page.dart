@@ -31,32 +31,6 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     fit: BoxFit.cover)),
           ),
         ),
-        // //// Back Button
-        // Container(
-        //   height: 100,
-        //   padding: EdgeInsets.symmetric(
-        //     horizontal: defaultMargin,
-        //   ),
-        //   child: Align(
-        //     alignment: Alignment.centerLeft,
-        //     child: GestureDetector(
-        //         onTap: () {
-        //           if (widget.onBackButtonPressed != null) {
-        //             widget.onBackButtonPressed();
-        //           }
-        //         },
-        //         child: Container(
-        //             padding: EdgeInsets.all(3),
-        //             width: 30,
-        //             height: 30,
-        //             decoration: BoxDecoration(
-        //               borderRadius: BorderRadius.circular(8),
-        //               color: Colors.black12,
-        //             ),
-        //             child:
-        //                 Image.asset('assets/back_arrow_white.png'))),
-        //   ),
-        // ),
         SafeArea(
           child: ListView(
             children: [
@@ -210,7 +184,7 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                         //   ],
                         // ),
                         
-                        SizedBox(height: 40,),
+                        SizedBox(height: 50,),
                       ],
                     ),
                   )
@@ -256,7 +230,11 @@ class _FoodDetailsPageState extends State<FoodDetailsPage> {
                     color: mainColor,
                     elevation: 0,
                     onPressed: () {
-                      Get.to(PaymentPage(transaction:  widget.transaction.copyWith(quantity: quantity,)));
+                      Get.to(PaymentPage(
+                        transaction:  widget.transaction.copyWith(
+                          quantity: quantity, 
+                          total: quantity * widget.transaction.food.price)
+                        ));
                     },
                     child: Text("Order Now",
                         style: blackFontStyle3.copyWith(
