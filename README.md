@@ -2,7 +2,18 @@
 
 Sebuah project hasil dari couser BuildWithAngga(BWA) FullStack Flutter Laravel
 
-## Getting Started
+## Screenshot
+
+<p float="left">
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo1.jpg" width="300" />
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo2.jpg" width="300" /> 
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo3.jpg" width="300" />
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo4.jpg" width="300" />
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo5.jpg" width="300" />
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo6.jpg" width="300" />
+  <img src="https://github.com/Munawir712/food_market/blob/main/assets/photo7.jpg" width="300" />
+</p>
+
 
 This project is a starting point for a Flutter application.
 
