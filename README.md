@@ -1,6 +1,6 @@
 # food_market
 
-A new Flutter project.
+Sebuah project hasil dari couser BuildWithAngga(BWA) FullStack Flutter Laravel
 
 ## Getting Started
 
