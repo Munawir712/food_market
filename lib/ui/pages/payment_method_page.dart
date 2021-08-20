@@ -13,7 +13,8 @@ class PaymentMethodPage extends StatelessWidget {
           subtitle: "Please select your favourite\npayment method",
           picturePath: 'assets/Payment.png',
           buttonTap1: () async {
-            await launch(paymentURL);
+            // await launch(paymentURL);
+						Get.to(PayWebView(paymentUrl: paymentURL));
           },
           buttonTitle1: "Payment Method",
           buttonTap2: () {

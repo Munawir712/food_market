@@ -95,7 +95,8 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
                                             bottom: 16),
                                         child: GestureDetector(
                                           onTap: () async {
-                                            await launch(e.paymentUrl);
+                                            // await launch(e.paymentUrl);
+																						Get.to(PayWebView(paymentUrl: e.paymentUrl));
                                           },
                                           child: OrderListItem(
                                             transaction: e,
